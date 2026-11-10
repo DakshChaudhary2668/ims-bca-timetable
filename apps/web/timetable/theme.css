@@ -1,0 +1,9 @@
+:root {
+  --ims-navy: #102433;
+  --ims-ink: #17242b;
+  --ims-paper: #fbfaf7;
+  --ims-rule: #e4e0d8;
+  --ims-gold: #e7c987;
+  --ims-heading: "Playfair Display", Georgia, serif;
+  --ims-body: "DM Sans", system-ui, sans-serif;
+}

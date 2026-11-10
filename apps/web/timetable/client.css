@@ -1,0 +1,158 @@
+:root {
+  --navy: var(--ims-navy);
+  --ink: var(--ims-ink);
+  --paper: var(--ims-paper);
+  --line: var(--ims-rule);
+}
+body {
+  font-family: var(--ims-body);
+}
+h1,
+.panel-title h2,
+.modal-title {
+  font-family: var(--ims-heading);
+}
+.nav-item.active {
+  background: var(--ims-gold);
+}
+.nav-item {
+  text-decoration: none;
+}
+.toolbar {
+  flex-wrap: wrap;
+}
+.select-wrap select,
+.primary-button,
+.outline-button,
+.quiet-button,
+.tab,
+.page-heading p,
+.legend,
+.source-note,
+.field label {
+  font-size: 13px;
+}
+.top-actions button {
+  white-space: nowrap;
+}
+.select-wrap select:focus-visible {
+  outline: 2px solid #386b85;
+  outline-offset: -2px;
+}
+.toolbar .select-wrap {
+  min-width: 136px;
+}
+.side-label,
+.crumb,
+.crumb b {
+  font-size: 11px;
+}
+.page-heading p,
+.legend,
+.source-note,
+.field label {
+  color: #4d565b;
+}
+.primary-button {
+  background: #846331;
+}
+.primary-button:disabled,
+.outline-button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+[hidden] {
+  display: none !important;
+}
+.schedule-message,
+#dailySchedule {
+  padding: 16px;
+}
+.schedule td .course-card {
+  min-height: 48px;
+  height: auto;
+  width: 100%;
+  border: 0;
+  color: var(--ink);
+  padding: 6px;
+  font:
+    700 12px "DM Sans",
+    sans-serif;
+}
+.schedule td .course-card + .course-card {
+  margin-top: 3px;
+}
+.course-card small {
+  color: #465054;
+  font-size: 11px;
+}
+.schedule td .course-card.empty {
+  background: #f0ede6;
+  color: #48535a;
+}
+#issues {
+  padding-left: 18px;
+  margin: 8px 0;
+}
+#issues li + li {
+  margin-top: 8px;
+}
+#dailySchedule article {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+#dailySchedule article p,
+#versionDetails {
+  margin: 4px 0;
+}
+#modalError {
+  color: #8c2c26;
+}
+@media (max-width: 850px) {
+  .operations-panel {
+    display: block;
+  }
+  .sidebar {
+    overflow-y: auto;
+    visibility: hidden;
+  }
+  .sidebar.open {
+    visibility: visible;
+  }
+}
+@media (max-width: 560px) {
+  .toolbar .select-wrap {
+    min-width: 0;
+  }
+  .view-actions .outline-button,
+  .nav-item,
+  .tab {
+    min-height: 44px;
+  }
+  .quiet-button[hidden] {
+    display: none;
+  }
+  .details-panel > button {
+    margin-top: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+}
+.schedule td.protected-cell {
+  background: var(--gold-light);
+  font-weight: 700;
+}
+
+.schedule thead th,
+.schedule tbody th {
+  font-size: 11px;
+}
+.schedule tbody th {
+  background: #f6f4ef;
+  color: var(--ink);
+}

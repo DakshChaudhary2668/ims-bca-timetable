@@ -1,0 +1,15 @@
+node_modules/
+.pnpm-store/
+.next/
+dist/
+*.tsbuildinfo
+.env
+.env.local
+next-env.d.ts
+apps/api/generated/
+.taste-skill/
+pnpm-lock.yaml
+apps/api/prisma/migrations/
+
+# Keep the imported frontend source byte-for-byte.
+references/master-timetable/

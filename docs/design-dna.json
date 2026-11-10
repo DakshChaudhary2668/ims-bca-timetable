@@ -1,0 +1,472 @@
+{
+  "meta": {
+    "name": "IMS Ghaziabad academic operations",
+    "description": "Measured palette from the supplied still. Other properties are observed or inferred. Video measurement includes the photographed monitor and is corroborating evidence.",
+    "source_references": [
+      "Supplied desktop timetable and mobile daily-operations still",
+      "VIDEO-2026-11-07-15-34-07.mp4, sampled at 10%, 50%, and 85%",
+      "Supplied IMS Ghaziabad UCC white logo"
+    ],
+    "created_at": "2026-11-10"
+  },
+  "design_system": {
+    "color": {
+      "palette_type": "split-complementary",
+      "primary": {
+        "hex": "#0f1c29",
+        "role": "Navy navigation and paper foreground"
+      },
+      "secondary": {
+        "hex": "#2f3740",
+        "role": "Dark register header"
+      },
+      "accent": {
+        "hex": "#9b7847",
+        "role": "Measured bronze for primary actions. Pale #debe8e identifies the active destination."
+      },
+      "neutral": {
+        "scale": [
+          "#f7f4f0",
+          "#e8e6e3",
+          "#a9acaf",
+          "#6e7175",
+          "#2f3740",
+          "#0f1c29"
+        ],
+        "usage": "Darkest navy is the primary foreground against warm paper and the ground for the rail."
+      },
+      "semantic": {
+        "success": "#315835",
+        "warning": "#705120",
+        "error": "#8a2929",
+        "info": "#315578"
+      },
+      "surface": {
+        "background": "#f7f4f0",
+        "card": "#fdfbf8",
+        "elevated": "#fdfbf8"
+      },
+      "contrast_strategy": "Dark navy on pale paper and pale gold. Near-black on bronze. Warm white on navy. Semantic states pair color with text.",
+      "measurement": {
+        "k": 8,
+        "sampling": {
+          "method": "deterministic_stratified",
+          "max_pixels": 160000,
+          "sampled_pixels": 160000
+        }
+      },
+      "measured_palette": [
+        {
+          "hex": "#f7f4f0",
+          "coverage": 0.5439,
+          "role": "background"
+        },
+        {
+          "hex": "#0f1c29",
+          "coverage": 0.2326,
+          "role": "text"
+        },
+        {
+          "hex": "#e8e6e3",
+          "coverage": 0.1266,
+          "role": "unassigned"
+        },
+        {
+          "hex": "#2f3740",
+          "coverage": 0.0448,
+          "role": "unassigned"
+        },
+        {
+          "hex": "#9b7847",
+          "coverage": 0.0223,
+          "role": "accent"
+        },
+        {
+          "hex": "#a9acaf",
+          "coverage": 0.011,
+          "role": "unassigned"
+        },
+        {
+          "hex": "#6e7175",
+          "coverage": 0.0103,
+          "role": "unassigned"
+        },
+        {
+          "hex": "#debe8e",
+          "coverage": 0.0086,
+          "role": "unassigned"
+        }
+      ],
+      "video_measurement": {
+        "k": 8,
+        "sampling": {
+          "method": "deterministic_stratified",
+          "max_pixels": 160000,
+          "sampled_pixels": 160000
+        }
+      },
+      "video_measured_palette": [
+        {
+          "hex": "#0a101e",
+          "coverage": 0.27,
+          "role": "background"
+        },
+        {
+          "hex": "#e2e3df",
+          "coverage": 0.2326,
+          "role": "text"
+        },
+        {
+          "hex": "#d0d1cf",
+          "coverage": 0.2309,
+          "role": "unassigned"
+        },
+        {
+          "hex": "#babbbd",
+          "coverage": 0.1532,
+          "role": "unassigned"
+        },
+        {
+          "hex": "#a3a3a5",
+          "coverage": 0.0757,
+          "role": "unassigned"
+        },
+        {
+          "hex": "#838181",
+          "coverage": 0.0195,
+          "role": "unassigned"
+        },
+        {
+          "hex": "#44474e",
+          "coverage": 0.0166,
+          "role": "unassigned"
+        },
+        {
+          "hex": "#4f88b4",
+          "coverage": 0.0015,
+          "role": "unassigned"
+        }
+      ]
+    },
+    "typography": {
+      "type_scale": {
+        "display": {
+          "size": "42px",
+          "weight": 700,
+          "line_height": 1.06,
+          "tracking": "-0.03em"
+        },
+        "heading_1": {
+          "size": "32px",
+          "weight": 700,
+          "line_height": 1.16,
+          "tracking": "-0.025em"
+        },
+        "heading_2": {
+          "size": "21px",
+          "weight": 700,
+          "line_height": 1.22,
+          "tracking": "-0.025em"
+        },
+        "heading_3": {
+          "size": "15px",
+          "weight": 650,
+          "line_height": 1.4,
+          "tracking": "0"
+        },
+        "body": {
+          "size": "14px",
+          "weight": 400,
+          "line_height": 1.5,
+          "tracking": "0"
+        },
+        "body_small": {
+          "size": "13px",
+          "weight": 400,
+          "line_height": 1.45,
+          "tracking": "0"
+        },
+        "caption": {
+          "size": "12px",
+          "weight": 500,
+          "line_height": 1.4,
+          "tracking": "0"
+        },
+        "overline": {
+          "size": "12px",
+          "weight": 600,
+          "line_height": 1.4,
+          "tracking": "0.10em"
+        }
+      },
+      "font_families": {
+        "heading": "Georgia, Times New Roman, serif",
+        "body": "system-ui, sans-serif",
+        "mono": "System monospace for code only"
+      },
+      "font_style_notes": "Font identity is inferred. Use a traditional serif for section titles and a practical sans for controls and data."
+    },
+    "spacing": {
+      "base_unit": "4px",
+      "scale": [4, 8, 12, 16, 20, 24, 28, 32, 40, 48],
+      "content_density": "comfortable",
+      "section_rhythm": "24px between dashboard blocks, with compact rows inside registers."
+    },
+    "layout": {
+      "grid_system": "228px navigation rail and a fluid working sheet. The dashboard register shares a row with a narrower action column.",
+      "max_content_width": "Fluid desktop canvas",
+      "columns": "Desktop rail and workspace, stacked navigation and sheet on small screens",
+      "gutter": "24px desktop dashboard, 14–16px mobile",
+      "breakpoints": ["900px shell", "640px single-column work area"],
+      "alignment_tendency": "Asymmetric grid with aligned left edges"
+    },
+    "shape": {
+      "border_radius": {
+        "small": "6px",
+        "medium": "10px",
+        "large": "16px",
+        "pill": "Only for short semantic labels"
+      },
+      "border_usage": "Subtle outlines around controls and registers",
+      "divider_style": "Single rule between related rows"
+    },
+    "elevation": {
+      "shadow_style": "None on resting surfaces",
+      "levels": {
+        "low": "Flat paper over navy",
+        "medium": "Surface plus border",
+        "high": "Modal over translucent navy scrim"
+      },
+      "depth_cues": "Contrast and shared edges"
+    },
+    "iconography": {
+      "style": "Line icons",
+      "stroke_weight": "1.6–2px",
+      "size_scale": ["16px", "18px", "20px"],
+      "preferred_set": "Existing outline SVG paths"
+    },
+    "motion": {
+      "easing": "Native controls",
+      "duration_scale": {
+        "micro": "Instant",
+        "normal": "Instant",
+        "macro": "None"
+      },
+      "entrance_pattern": "Content visible on load",
+      "exit_pattern": "Native dialog dismissal",
+      "philosophy": "Functional feedback. Video shows ordinary document scrolling."
+    },
+    "components": {
+      "button_style": "Flat bronze primary with near-black text, and bordered secondary",
+      "input_style": "Native controls with warm-white fill and a visible border",
+      "card_style": "Paper register panels with hairline outlines and darker table headers",
+      "navigation_pattern": "Navy rail and gold current item, compact top navigation on mobile",
+      "modal_style": "Native dialog with warm paper and navy scrim, inferred for existing editors",
+      "list_style": "Dense, aligned register rows",
+      "component_notes": "Keep the existing register and CRUD controls. Timetable and substitution examples inform styling only."
+    }
+  },
+  "design_style": {
+    "aesthetic": {
+      "mood": ["academic", "calm", "formal", "warm"],
+      "visual_metaphor": "A printed academic register in a navy binding",
+      "era_influence": "Collegiate print typography and contemporary operations UI",
+      "genre": "Institutional scheduling software",
+      "personality_traits": ["methodical", "direct", "considered"],
+      "adjectives": ["compact", "legible", "structured"]
+    },
+    "visual_language": {
+      "complexity": "moderate",
+      "ornamentation": "restrained gold and the IMS seal",
+      "whitespace_usage": "Compact rows with breathing room between groups",
+      "visual_weight_distribution": "Dark rail and table heading frame the lighter working surface",
+      "focal_strategy": "The register is the main working area",
+      "contrast_level": "high",
+      "texture_usage": "The mockup has faint static texture. The UI uses flat surfaces."
+    },
+    "composition": {
+      "hierarchy_method": "Serif heading scale, dark table band, selective gold",
+      "balance_type": "Asymmetric desktop, stacked mobile",
+      "flow_direction": "Top-down within each register",
+      "grouping_strategy": "Keep controls adjacent to the records they modify",
+      "negative_space_role": "Separate registers and leave room for actual records"
+    },
+    "imagery": {
+      "photo_treatment": "No application photography in the references",
+      "illustration_style": "Supplied IMS mark and restrained outline icons",
+      "graphic_elements": "Dark register headers and gold selected controls",
+      "pattern_usage": "Rules follow actual rows",
+      "image_shape": "Uncropped wide logo"
+    },
+    "interaction_feel": {
+      "feedback_style": "Readable labels and visible native control states",
+      "hover_behavior": "Small tone changes inferred for the applied UI",
+      "transition_personality": "Immediate",
+      "loading_style": "Unspecified in reference",
+      "microinteraction_density": "Low"
+    },
+    "brand_voice_in_ui": {
+      "tone": "Academic and operational",
+      "formality": "Professional",
+      "cta_style": "Name the concrete action",
+      "empty_state_approach": "Give the next available setup step",
+      "error_tone": "Explain the failure and how to retry"
+    }
+  },
+  "visual_effects": {
+    "overview": {
+      "effect_intensity": "none",
+      "performance_tier": "lightweight",
+      "fallback_strategy": "Normal document layout and native controls",
+      "primary_technology": "CSS"
+    },
+    "background_effects": {
+      "type": "none",
+      "description": "No moving background",
+      "technology": "CSS flat color",
+      "params": {
+        "color_palette": ["#0f1c29", "#f7f4f0"],
+        "speed": 0,
+        "density": 0,
+        "opacity": 1,
+        "blend_mode": "normal"
+      }
+    },
+    "particle_systems": {
+      "enabled": false,
+      "type": "none",
+      "description": "No particles",
+      "technology": "none",
+      "params": {
+        "count": "none",
+        "shape": "none",
+        "size_range": "none",
+        "movement_pattern": "none",
+        "color_behavior": "none",
+        "interaction": "none",
+        "spawn_area": "none"
+      }
+    },
+    "3d_elements": {
+      "enabled": false,
+      "type": "none",
+      "description": "The phone frame is reference presentation",
+      "technology": "none",
+      "params": {
+        "renderer": "none",
+        "lighting": "none",
+        "camera": "none",
+        "materials": "none",
+        "geometry": "none",
+        "post_processing": "none",
+        "interaction_model": "none"
+      }
+    },
+    "shader_effects": {
+      "enabled": false,
+      "type": "none",
+      "description": "No shader observed",
+      "technology": "none",
+      "params": {
+        "uniforms": "none",
+        "vertex_manipulation": "none",
+        "fragment_output": "none",
+        "noise_type": "none",
+        "distortion": "none"
+      }
+    },
+    "scroll_effects": {
+      "parallax": {
+        "enabled": false,
+        "layers": [],
+        "depth_range": 0,
+        "speed_curve": "none"
+      },
+      "scroll_triggered_animations": {
+        "enabled": false,
+        "trigger_points": [],
+        "animation_type": "none",
+        "scrub_behavior": "none"
+      },
+      "scroll_morphing": {
+        "enabled": false,
+        "description": "Standard document scrolling in the video"
+      }
+    },
+    "text_effects": {
+      "type": "none",
+      "description": "Static heading and data text",
+      "technology": "CSS",
+      "params": {
+        "split_strategy": "none",
+        "animation_per_unit": "none",
+        "stagger": 0,
+        "effect_style": "none"
+      }
+    },
+    "cursor_effects": {
+      "enabled": false,
+      "type": "none",
+      "description": "Standard pointer",
+      "technology": "none",
+      "params": {
+        "shape": "none",
+        "size": "none",
+        "blend_mode": "none",
+        "trail": "none",
+        "interaction_zone": "none"
+      }
+    },
+    "image_effects": {
+      "type": "none",
+      "description": "Logo displayed statically",
+      "technology": "Image element",
+      "params": {
+        "filter_pipeline": "none",
+        "hover_transform": "none",
+        "reveal_animation": "none",
+        "distortion_type": "none"
+      }
+    },
+    "glassmorphism_neumorphism": {
+      "enabled": false,
+      "type": "none",
+      "description": "Flat resting surfaces",
+      "technology": "none",
+      "style": "none",
+      "params": {
+        "blur_radius": "none",
+        "transparency": "none",
+        "border_treatment": "none",
+        "shadow_type": "none",
+        "light_source_angle": "none"
+      }
+    },
+    "canvas_drawings": {
+      "enabled": false,
+      "type": "none",
+      "description": "Rows use semantic HTML",
+      "technology": "none",
+      "params": {
+        "draw_method": "none",
+        "animation_loop": "none",
+        "color_scheme": "none",
+        "responsiveness": "none",
+        "interaction": "none"
+      }
+    },
+    "svg_animations": {
+      "enabled": false,
+      "type": "none",
+      "description": "Icons are static",
+      "technology": "none",
+      "params": {
+        "animation_method": "none",
+        "path_morphing": "none",
+        "stroke_animation": "none",
+        "filter_effects": "none"
+      }
+    },
+    "composite_notes": "The composite still takes precedence over the photographed video for exact palette. Device chrome, sample names, dates, and feature states are illustrative. Coverage in the composite includes two viewports and is expected to differ from any single running screen."
+  }
+}

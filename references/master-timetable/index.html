@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#102433" />
+  <title>IMS Ghaziabad · Academic Scheduling</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#overview" aria-label="IMS Ghaziabad home">
+        <span class="brand-mark">IMS</span><span class="brand-name">IMS <b>GHAZIABAD</b><small>UNIVERSITY COURSES CAMPUS</small></span>
+      </a>
+      <div class="side-rule"></div>
+      <div class="side-label">ACADEMIC OFFICE</div>
+      <nav class="nav" aria-label="Main navigation">
+        <button data-page="overview" class="nav-item"><span>▦</span>Overview</button>
+        <button data-page="setup" class="nav-item"><span>▱</span>Academic setup <i>›</i></button>
+        <button data-page="timetable" class="nav-item active"><span>▣</span>Timetable builder</button>
+        <button data-page="faculty" class="nav-item"><span>♙</span>Faculty &amp; workload</button>
+        <button data-page="operations" class="nav-item"><span>▤</span>Daily operations</button>
+        <button data-page="reports" class="nav-item"><span>▥</span>Reports &amp; exports</button>
+      </nav>
+      <div class="sidebar-bottom"><button data-page="settings" class="nav-item"><span>⚙</span>Settings</button><div class="user-chip"><span class="avatar">PL</span><span><b>Programme lead</b><small>Academic office</small></span><span class="more">···</span></div></div>
+    </aside>
+    <main class="main">
+      <header class="topbar"><button class="mobile-menu" id="menuButton" aria-label="Open navigation">☰</button><div class="crumb">ACADEMIC SCHEDULING <span></span> <b id="crumbCurrent">TIMETABLE BUILDER</b></div><div class="top-actions"><button class="icon-button" aria-label="Notifications">♧<i></i></button><span class="avatar">PL</span><button class="chevron" aria-label="Profile menu">⌄</button></div></header>
+      <div class="content">
+        <section class="page-heading"><div><div class="eyebrow">MASTER SCHEDULE <span class="gold-line"></span></div><h1 id="pageTitle">Weekly timetable</h1><p id="pageDescription">View and manage the approved teaching week.</p><p class="print-meta" id="printMeta"></p></div><button class="quiet-button" id="importButton">▤ <span>Master resource</span></button></section>
+        <section class="page-extra" id="pageExtra" hidden></section>
+        <section class="toolbar" aria-label="Timetable selections">
+          <label class="select-wrap"><span class="sr-only">Programme and semester</span><select id="programme"><option value="1">BCA · Semester 1</option><option value="3">BCA · Semester 3</option><option value="5">BCA · Semester 5</option></select><b>⌄</b></label>
+          <label class="select-wrap compact"><span class="sr-only">Section</span><select id="section"><option>Section A</option><option>Section B</option><option>Section C</option><option>Section D</option></select><b>⌄</b></label>
+          <label class="select-wrap week"><span class="calendar">▦</span><select id="week"><option>26–30 Oct 2026</option><option>02–06 Nov 2026</option><option selected>09–13 Nov 2026</option><option>16–20 Nov 2026</option></select><b>⌄</b></label>
+          <span class="status-pill published" id="publishStatus"><i></i> Published</span>
+          <button class="primary-button" id="generateButton"><span>▷</span> Create daily version</button>
+        </section>
+        <section class="viewbar"><div class="tabs" role="tablist"><button class="tab selected" data-view="section">By section</button><button class="tab" data-view="faculty">By faculty</button><button class="tab" data-view="room">By room</button></div><div class="view-actions"><button class="outline-button" id="validateButton">◉ <span>Validate conflicts</span></button><button class="outline-button mobile-filter" id="filterButton">☷ Filters</button></div></section>
+        <div class="workspace">
+          <section class="schedule-panel">
+            <div class="table-scroll"><table class="schedule" id="scheduleTable"><thead></thead><tbody></tbody></table></div>
+            <div class="legend"><span><i class="legend-dot lecture"></i>Lecture</span><span><i class="legend-dot lab"></i>Lab / Practical</span><span><i class="legend-dot activity"></i>Activity</span><span><i class="legend-dot break"></i>Lunch / Break</span></div>
+          </section>
+          <aside class="operations-panel">
+            <div class="panel-title"><h2>Week operations</h2><span class="date-label" id="dateLabel">26–30 OCT 2026</span></div>
+            <button class="operation-link" data-page="operations"><span class="op-icon">♙</span><span><b>Faculty absence</b><small>Record and find cover</small></span><i>›</i></button>
+            <button class="operation-link" data-page="operations"><span class="op-icon">⇄</span><span><b>Review substitutions</b><small>Selected day</small></span><i>›</i></button>
+            <button class="operation-link" data-page="reports"><span class="op-icon">▤</span><span><b>Export circular</b><small>Daily schedule notice</small></span><i>›</i></button>
+            <div class="conflict-card" id="conflictCard"><span class="check-icon">✓</span><div><b>No unresolved conflicts</b><small>All scheduled sessions are valid.</small></div></div>
+          </aside>
+        </div>
+        <section class="details-panel">
+          <div class="details-left"><h2><span>▦</span> Timetable details</h2><div class="detail-grid"><div><small>PROGRAMME</small><b>BCA</b></div><div><small>SEMESTER</small><b id="semesterDetail">1</b></div><div><small>SECTION</small><b id="sectionDetail">A</b></div><div><small>WORKING DAYS</small><b>Mon – Fri</b></div><div><small>LUNCH</small><b id="lunchDetail">12:40 – 1:40</b></div><div><small>SECTION ROOM</small><b id="roomDetail">303</b></div></div></div>
+          <div class="details-right"><h2><span>▱</span> Actions</h2><button class="outline-button" id="editButton">✎ <span>Edit timetable</span></button><button class="outline-button" id="printButton">▣ <span>Print / PDF</span></button><button class="outline-button" id="exportButton">↓ <span>Export schedule</span>⌄</button></div>
+        </section>
+        <footer class="source-note">Approved BCA master schedule effective 26 Oct 2026. Changes save in this browser only. <button id="constraintsButton">View constraints</button></footer>
+      </div>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <dialog id="modal"><form method="dialog"><button class="modal-close" aria-label="Close">×</button><div id="modalContent"></div><div class="modal-actions"><button class="outline-button" value="cancel">Close</button><button class="primary-button" id="modalAction" value="confirm">Confirm</button></div></form></dialog>
+  <script src="master-resource.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

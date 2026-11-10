@@ -1,0 +1,36 @@
+node_modules/
+.pnpm-store/
+.next/
+dist/
+*.tsbuildinfo
+.env
+.env.local
+next-env.d.ts
+apps/api/generated/
+.taste-skill/
+
+# Local configuration and credentials
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Database and institutional exports. Keep source migrations.
+*.dump
+*.backup
+*.sql
+*.sql.gz
+*.sqlite
+*.sqlite3
+*.db
+!apps/api/prisma/migrations/*/migration.sql
+*.xlsx
+*.xls
+private-data/
+exports/
+ims-timetable-backup*.json
+ims-timetable-browser-backup.json
+/references/master-timetable/master-resource.js

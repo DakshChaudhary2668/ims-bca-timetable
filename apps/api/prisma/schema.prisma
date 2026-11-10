@@ -1,0 +1,184 @@
+generator client {
+  provider            = "prisma-client"
+  output              = "../generated/prisma"
+  importFileExtension = "js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model AcademicYear {
+  id                    String             @id @default(uuid()) @db.Uuid
+  name                  String             @unique
+  startsOn              DateTime           @db.Date
+  endsOn                DateTime           @db.Date
+  regularDailyClasses   Int                @default(3)
+  maxTotalDailyPeriods  Int?
+  maxConsecutivePeriods Int?
+  timetables            TimetableVersion[]
+  semesters             Semester[]
+  timeSlots             TimeSlot[]
+}
+
+model Semester {
+  id             String       @id @default(uuid()) @db.Uuid
+  academicYearId String       @db.Uuid
+  number         Int
+  academicYear   AcademicYear @relation(fields: [academicYearId], references: [id])
+  sections       Section[]
+  subjects       Subject[]
+
+  @@unique([academicYearId, number])
+}
+
+model Section {
+  id         String              @id @default(uuid()) @db.Uuid
+  semesterId String              @db.Uuid
+  name       String
+  semester   Semester            @relation(fields: [semesterId], references: [id])
+  groups     StudentGroup[]
+  overrides  WeeklyRequirement[]
+
+  @@unique([semesterId, name])
+  @@unique([id, semesterId])
+}
+
+model StudentGroup {
+  id           String               @id @default(uuid()) @db.Uuid
+  sectionId    String               @db.Uuid
+  semesterId   String               @db.Uuid
+  name         String
+  section      Section              @relation(fields: [sectionId, semesterId], references: [id, semesterId], onUpdate: Restrict)
+  wholeSection Boolean?
+  allocations  TeachingAllocation[]
+
+  @@unique([sectionId, name])
+  @@unique([id, semesterId])
+}
+
+model Subject {
+  id           String                      @id @default(uuid()) @db.Uuid
+  semesterId   String                      @db.Uuid
+  code         String
+  name         String
+  semester     Semester                    @relation(fields: [semesterId], references: [id])
+  requirements WeeklyRequirement[]
+  eligibility  FacultySubjectEligibility[]
+  allocations  TeachingAllocation[]
+
+  @@unique([semesterId, code])
+  @@unique([id, semesterId])
+}
+
+model WeeklyRequirement {
+  id           String   @id @default(uuid()) @db.Uuid
+  subjectId    String   @db.Uuid
+  semesterId   String   @db.Uuid
+  sectionId    String?  @db.Uuid
+  lectureCount Int
+  subject      Subject  @relation(fields: [subjectId, semesterId], references: [id, semesterId], onUpdate: Restrict)
+  section      Section? @relation(fields: [sectionId, semesterId], references: [id, semesterId], onUpdate: Restrict)
+
+  @@unique([subjectId, sectionId])
+}
+
+model Faculty {
+  id           String                      @id @default(uuid()) @db.Uuid
+  facultyCode  String                      @unique
+  name         String
+  active       Boolean                     @default(true)
+  eligibility  FacultySubjectEligibility[]
+  allocations  TeachingAllocation[]
+  availability FacultyAvailability[]
+}
+
+model FacultySubjectEligibility {
+  id        String  @id @default(uuid()) @db.Uuid
+  facultyId String  @db.Uuid
+  subjectId String  @db.Uuid
+  faculty   Faculty @relation(fields: [facultyId], references: [id])
+  subject   Subject @relation(fields: [subjectId], references: [id])
+
+  @@unique([facultyId, subjectId])
+}
+
+model TeachingAllocation {
+  id             String           @id @default(uuid()) @db.Uuid
+  facultyId      String           @db.Uuid
+  subjectId      String           @db.Uuid
+  studentGroupId String           @db.Uuid
+  semesterId     String           @db.Uuid
+  entries        TimetableEntry[]
+  faculty        Faculty          @relation(fields: [facultyId], references: [id])
+  subject        Subject          @relation(fields: [subjectId, semesterId], references: [id, semesterId], onUpdate: Restrict)
+  studentGroup   StudentGroup     @relation(fields: [studentGroupId, semesterId], references: [id, semesterId], onUpdate: Restrict)
+
+  @@unique([facultyId, subjectId, studentGroupId])
+}
+
+model Room {
+  id      String           @id @default(uuid()) @db.Uuid
+  name    String           @unique
+  entries TimetableEntry[]
+}
+
+model TimeSlot {
+  id             String                @id @default(uuid()) @db.Uuid
+  academicYearId String                @db.Uuid
+  weekday        Int
+  startsAtMinute Int
+  endsAtMinute   Int
+  protectedBreak Boolean               @default(false)
+  academicYear   AcademicYear          @relation(fields: [academicYearId], references: [id])
+  availability   FacultyAvailability[]
+  entries        TimetableEntry[]
+
+  @@unique([academicYearId, weekday, startsAtMinute])
+}
+
+model FacultyAvailability {
+  id         String   @id @default(uuid()) @db.Uuid
+  facultyId  String   @db.Uuid
+  timeSlotId String   @db.Uuid
+  available  Boolean
+  faculty    Faculty  @relation(fields: [facultyId], references: [id])
+  timeSlot   TimeSlot @relation(fields: [timeSlotId], references: [id])
+
+  @@unique([facultyId, timeSlotId])
+}
+
+enum TimetableStatus {
+  DRAFT
+  VALIDATED
+  PUBLISHED
+}
+
+model TimetableVersion {
+  id             String           @id @default(uuid()) @db.Uuid
+  academicYearId String           @db.Uuid
+  academicYear   AcademicYear     @relation(fields: [academicYearId], references: [id])
+  status         TimetableStatus  @default(DRAFT)
+  revision       Int              @default(0)
+  number         Int?
+  publishedAt    DateTime?
+  publishedBy    String?
+  snapshot       Json?
+  entries        TimetableEntry[]
+
+  @@unique([academicYearId, number])
+}
+
+model TimetableEntry {
+  id           String             @id @default(uuid()) @db.Uuid
+  versionId    String             @db.Uuid
+  allocationId String             @db.Uuid
+  timeSlotId   String             @db.Uuid
+  roomId       String             @db.Uuid
+  version      TimetableVersion   @relation(fields: [versionId], references: [id])
+  allocation   TeachingAllocation @relation(fields: [allocationId], references: [id])
+  timeSlot     TimeSlot           @relation(fields: [timeSlotId], references: [id])
+  room         Room               @relation(fields: [roomId], references: [id])
+
+  @@index([versionId, timeSlotId])
+}
