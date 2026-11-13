@@ -1,6 +1,6 @@
 # Timetable engine handoff for Harry
 
-**Planned.** Implement a deterministic Python core using Google OR-Tools CP-SAT under `services/scheduler`. The directory currently contains documentation only. The solver takes a versioned snapshot and returns a proposed **draft**. Express owns the data, revision check, validation, persistence and explicit publication.
+**Contract v1 implemented in `services/scheduler`.** The Python core uses Google OR-Tools CP-SAT and takes a versioned snapshot to return a proposed **draft**. Express still owns the data, revision check, validation, persistence and explicit publication. See the [scheduler setup and supported rules](../services/scheduler/README.md).
 
 ## Problem and actual inputs
 
@@ -225,7 +225,7 @@ Node supplies a consistent snapshot. Contract arrays are projections of current 
 
 ### Infeasible output
 
-This variant removes the availability row for Demo Instructor B. The remaining Batch 2 allocation has no feasible slot.
+For the infeasible fixture, Demo Instructor B has no positive availability, and Demo Instructor A is marked unavailable in the later teaching slot. The contract says a whole-section placement counts toward each batch, so removing only Instructor B's availability would still allow the whole-section allocation to satisfy both batches' quota. This fixture removes that alternative as well.
 
 ```json
 {
@@ -240,7 +240,7 @@ This variant removes the availability row for Demo Instructor B. The remaining B
   "diagnostics": [
     {
       "code": "NO_AVAILABLE_SLOT",
-      "message": "Batch 2 has no available allocated instructor in any teaching slot.",
+      "message": "The batch allocation has no positively available slot.",
       "subjectId": "00000000-0000-4000-8000-000000000007",
       "studentGroupId": "00000000-0000-4000-8000-000000000006"
     }
@@ -257,4 +257,12 @@ Use `FEASIBLE` or `OPTIMAL` only for a complete solution. Use `INVALID_INPUT` fo
 3. Node validates every returned ID, collision and quota. The user reviews the proposal. A future apply command checks the draft revision and current catalog in a transaction, saves the proposal as DRAFT, and increments the revision. The current public API saves one session at a time.
 4. Use the existing explicit validation and PL-controlled publication flow. A feasible solver result never publishes or overrides a newer revision.
 
-First implement a pure synthetic fixture test for the example above and a test with no feasible Batch 2 placement. Add the integration route only after reviewing the versioned contract with Daksh.
+## Current implementation notes
+
+The Python function and CLI implement the contract above without changing its identifiers or quota meaning. Run the `feasible.json` and `infeasible.json` fixtures and the pytest suite using the commands in the scheduler README. The solver uses a feasibility-only model, one CP-SAT worker and a fixed seed. It returns `FEASIBLE` for a complete proposal, `INFEASIBLE` only after a proof, `INVALID_INPUT` for invalid prerequisites, and `UNKNOWN` when a time limit ends without a complete answer. It does not claim an optimal or unique timetable.
+
+An explicit zero quota is honored alongside other required teaching. When all effective quotas are zero, the solver reports `INFEASIBLE` with an `EMPTY` diagnostic because the current Node validator requires at least one session. Confirm whether that empty-draft policy should change before adding generation integration.
+
+The current Prisma `Room` model cannot express capacity, equipment, room suitability, availability, or travel; contract v1 cannot express cross-section shared teaching or consecutive multi-period practicals. Those remain unsupported and require agreement with Daksh before contract or schema changes. Current solver performance has not been benchmarked on a production-sized year. The Node API has no solver transport or bulk apply endpoint, so integration must validate every returned proposal using the existing validator before a human applies it.
+
+The pure synthetic fixture tests cover the example above and infeasible quota cases. Add the integration route only after reviewing the versioned contract with Daksh.

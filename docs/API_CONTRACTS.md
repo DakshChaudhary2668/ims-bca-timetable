@@ -45,4 +45,4 @@ Errors contain `error.message`. Many CRUD errors also include `error.code`. Zod 
 
 ## Proposed scheduler contract
 
-The [solver contract](TIMETABLE_ENGINE.md) is a future internal Node-to-Python interface. No generation, bulk import, or substitution API is registered.
+The [solver contract](TIMETABLE_ENGINE.md) defines the internal Node-to-Python interface. A standalone Python core implements contract v1, but no generation, bulk import, or substitution API is registered.

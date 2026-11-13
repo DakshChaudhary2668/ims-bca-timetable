@@ -1,6 +1,6 @@
 # Implementation status and pre-push audit
 
-Audit date: 2026-11-11. Status refers to the live Next.js/Express app. The standalone reference is a legacy prototype.
+Audit date: 2026-11-13. Status refers to the live Next.js/Express app and the local scheduler implementation. The standalone reference is a legacy prototype.
 
 | Module                                                             | Status                     | Evidence or gap                                                                                                                                                                                                                              |
 | ------------------------------------------------------------------ | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -13,22 +13,23 @@ Audit date: 2026-11-11. Status refers to the live Next.js/Express app. The stand
 | Print/PDF and browser backup export                                | Implemented but unverified | Browser print and legacy export are wired in the client. Print pagination and backup download were not exercised in this audit.                                                                                                              |
 | Legacy data transition                                             | Partial                    | Browser-local data can be exported at its original origin. No mapping or automatic import of institutional schedules into database IDs.                                                                                                      |
 | PostgreSQL portability to Supabase                                 | Partial                    | Standard PostgreSQL connection and migrations exist. Hosted connectivity, schema grants, extensions, TLS and migration behavior were not tested. No Supabase project configuration is present.                                               |
-| Python solver and integration                                      | Planned                    | [Engine handoff](TIMETABLE_ENGINE.md). No Python implementation or registered route.                                                                                                                                                         |
+| Python solver core                                                 | Implemented, locally verified | [CP-SAT engine](../services/scheduler), [contract](TIMETABLE_ENGINE.md), synthetic fixtures and pytest suite. Pure Python proposal generation only; no API transport, database access, Node cross-language execution, or apply route. |
 | Date-specific schedules, absences, substitutions and PNG circulars | Planned                    | [Substitution handoff](SUBSTITUTION_ENGINE.md). The weekday view does not persist dated overrides.                                                                                                                                           |
 | Shared hosted rollout                                              | Blocked                    | Confirm catalog visibility, operator provisioning, TLS, and institution-approved hosting before enabling access outside loopback.                                                                                                            |
-| GitHub first push                                                  | Blocked                    | No Git metadata is available in the audited workspace. History, tracked files, staging and remotes cannot be verified.                                                                                                                       |
+| GitHub first push                                                  | Not performed              | Repository cloned on `main` at `17ee5017d408a0ed587d1411e90541b7f7ac275d`; no changes have been committed or pushed.                                                                                                                       |
 
 ## Known limitations and debt
 
 - Catalog GETs are public to reachable clients, including faculty and availability. Published snapshots contain the year display catalog, including allocations. Confirm exposure before hosting. Operators share broad write permissions, keys are stored in browser tab storage, and the implementation lacks per-user expiration or account management.
 - Runtime schedule checks do not model room suitability, course-to-room compatibility, or regular allocation eligibility. Catalog changes can invalidate a draft. Publication revalidates, and historic displays use their snapshots.
+- The Python solver is a feasibility-only proposal core. It has no HTTP transport or draft apply route; shared multi-section sessions, room capability, room availability, travel, and multi-period practicals are outside contract v1. It has not been benchmarked on a production-sized year.
 - Legacy data access and browser sign-in depend on browser storage. Storage-disabled behavior was not exercised. Browser QA is not part of `pnpm test`.
 - The integration suite passes with a pg deprecation warning about concurrent queries on a client. Investigate before upgrading to pg 9.
 - The PL decisions on substitutions, batch counting, availability, eligibility and breaks are listed in [business rules](BUSINESS_RULES.md#pl-decisions).
 
 ## GitHub safety
 
-**Push readiness: NO.** `git status` returned “not a git repository.” There was no local `.git` directory or accessible parent repository. Commit history, previously tracked data, the branch and the remote were unavailable. Restore or clone the approved repository, then inspect its history and staged file list before any push. Ignore rules do not untrack files or sanitize earlier commits.
+**Push readiness: NO.** The approved repository is cloned on `main` at baseline `17ee5017d408a0ed587d1411e90541b7f7ac275d`; the working tree was clean before this sprint. Sprint changes are uncommitted and unpushed. Review changed files and scan for private records before any manual commit or push. No automatic commit or push was made.
 
 A targeted working-tree scan checked common credential patterns and filenames, including operator token assignments, PostgreSQL URLs, Supabase key prefixes and JWTs, provider keys and private keys. Matches reviewed were local example settings, placeholders, schema fields, or dynamically generated test tokens. No live credential was identified in the scanned source. This was a pattern scan, not a proof that secrets are absent. No local non-example environment file or database dump was found among the reviewed source candidates. Dependency advisories were not audited.
 
@@ -36,9 +37,11 @@ The legacy workbook extract includes room, session and faculty assignment data. 
 
 Generated clients, Next.js output, compiled API output, dependency stores, local env variants, common credential files and database dumps are excluded. The migration SQL exception keeps reviewed Prisma migrations available to developers. Do not stage private workbooks, exports or backups under different names.
 
-## Checks run
+## Sprint 03 checks run
 
-- `pnpm db:migrate` against a disposable local test database reported no pending migrations. The timetable test applied both migrations in an isolated test schema.
-- `pnpm test` passed all eight reported tests. `pnpm lint`, `pnpm build` and `pnpm typecheck` passed.
-- `pnpm format:check` passed. Relative file links and coverage of all 14 Prisma models were checked.
-- Next.js built from a temporary copy without the workbook extract, env files or generated output. The three solver examples parsed as JSON, and the feasible placement example passed the current full Node validator. No solver was executed.
+- Python 3.12 dependency installation succeeded with OR-Tools 9.15, Pydantic 2.14, pytest 8.4 and Ruff 0.17.
+- Scheduler tests: 19 passed. Coverage includes both fixtures, exact batch quotas, explicit zero quota, missing quota or allocation, missing availability, faculty and room collisions, whole-section/batch overlap, cross-semester faculty, breaks, workload limits, invalid references, deterministic output, empty-proposal handling, and timeout status mapping.
+- `ruff check scheduler tests` passed; `ruff format --check scheduler tests` passed.
+- CLI smoke run produced `FEASIBLE` for the feasible fixture and `INFEASIBLE` with no placements for the infeasible fixture.
+- The Node application build, lint, typecheck, and database integration suite were not rerun for this Python-only sprint. No disposable PostgreSQL test database was used. Cross-language validation through the Node validator remains an integration task.
+- A code review of the repo's fixture exposed that its original infeasible example contradicted whole-section quota accounting. The fixture now also removes the whole-section instructor's later availability; see [the contract note](TIMETABLE_ENGINE.md#infeasible-output).

@@ -6,7 +6,7 @@ flowchart LR
   Web --> Express["Express · authorization, validation and commands"]
   Express --> Prisma["Prisma 7 / pg"]
   Prisma --> Postgres[(PostgreSQL)]
-  Express -. proposed input .-> Solver["Python / OR-Tools CP-SAT · planned"]
+  Express -. proposed input .-> Solver["Python / OR-Tools CP-SAT · local core"]
   Solver -. draft proposal .-> Express
 ```
 
@@ -32,4 +32,4 @@ Writes compare version ID and revision inside a serializable transaction. Public
 
 ## Scheduler boundary
 
-Node will assemble a versioned snapshot, send it to Python, validate the reply against current state and persist accepted proposals as a draft. Python will neither own a database connection nor publish. Date-specific substitutions belong in the existing Node API. The [planned solver contract](TIMETABLE_ENGINE.md) and [decision log](DECISIONS.md) describe the boundary.
+The Python core accepts a versioned snapshot and returns a proposed draft. Node does not yet invoke it, validate its reply, or persist accepted proposals. Python has no database connection and cannot publish. Date-specific substitutions belong in the existing Node API. The [solver contract](TIMETABLE_ENGINE.md) and [decision log](DECISIONS.md) describe the boundary.

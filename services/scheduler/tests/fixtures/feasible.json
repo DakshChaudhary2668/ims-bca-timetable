@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "requestId": "demo-run-01",
+  "draft": {"versionId": "00000000-0000-4000-8000-000000000018", "revision": 2},
+  "academicYear": {"id": "00000000-0000-4000-8000-000000000001", "name": "Demo academic year", "startsOn": "2026-07-01", "endsOn": "2027-06-30", "regularDailyClasses": 3, "maxTotalDailyPeriods": null, "maxConsecutivePeriods": null},
+  "semesters": [{"id": "00000000-0000-4000-8000-000000000002", "academicYearId": "00000000-0000-4000-8000-000000000001", "number": 3}],
+  "sections": [{"id": "00000000-0000-4000-8000-000000000003", "semesterId": "00000000-0000-4000-8000-000000000002", "name": "A"}],
+  "studentGroups": [
+    {"id": "00000000-0000-4000-8000-000000000004", "sectionId": "00000000-0000-4000-8000-000000000003", "semesterId": "00000000-0000-4000-8000-000000000002", "name": "Whole section", "wholeSection": true},
+    {"id": "00000000-0000-4000-8000-000000000005", "sectionId": "00000000-0000-4000-8000-000000000003", "semesterId": "00000000-0000-4000-8000-000000000002", "name": "Batch 1", "wholeSection": false},
+    {"id": "00000000-0000-4000-8000-000000000006", "sectionId": "00000000-0000-4000-8000-000000000003", "semesterId": "00000000-0000-4000-8000-000000000002", "name": "Batch 2", "wholeSection": false}
+  ],
+  "subjects": [{"id": "00000000-0000-4000-8000-000000000007", "semesterId": "00000000-0000-4000-8000-000000000002", "code": "DEMO-DB", "name": "Demo databases"}],
+  "weeklyRequirements": [{"subjectId": "00000000-0000-4000-8000-000000000007", "semesterId": "00000000-0000-4000-8000-000000000002", "sectionId": null, "lectureCount": 2}],
+  "faculty": [
+    {"id": "00000000-0000-4000-8000-000000000008", "facultyCode": "DEMO-A", "name": "Demo Instructor A", "active": true},
+    {"id": "00000000-0000-4000-8000-000000000009", "facultyCode": "DEMO-B", "name": "Demo Instructor B", "active": true}
+  ],
+  "allocations": [
+    {"id": "00000000-0000-4000-8000-000000000015", "facultyId": "00000000-0000-4000-8000-000000000008", "subjectId": "00000000-0000-4000-8000-000000000007", "semesterId": "00000000-0000-4000-8000-000000000002", "studentGroupId": "00000000-0000-4000-8000-000000000004"},
+    {"id": "00000000-0000-4000-8000-000000000016", "facultyId": "00000000-0000-4000-8000-000000000008", "subjectId": "00000000-0000-4000-8000-000000000007", "semesterId": "00000000-0000-4000-8000-000000000002", "studentGroupId": "00000000-0000-4000-8000-000000000005"},
+    {"id": "00000000-0000-4000-8000-000000000017", "facultyId": "00000000-0000-4000-8000-000000000009", "subjectId": "00000000-0000-4000-8000-000000000007", "semesterId": "00000000-0000-4000-8000-000000000002", "studentGroupId": "00000000-0000-4000-8000-000000000006"}
+  ],
+  "rooms": [
+    {"id": "00000000-0000-4000-8000-000000000010", "name": "Demo Room A"},
+    {"id": "00000000-0000-4000-8000-000000000011", "name": "Demo Room B"}
+  ],
+  "timeSlots": [
+    {"id": "00000000-0000-4000-8000-000000000012", "academicYearId": "00000000-0000-4000-8000-000000000001", "weekday": 1, "startsAtMinute": 540, "endsAtMinute": 600, "protectedBreak": false},
+    {"id": "00000000-0000-4000-8000-000000000014", "academicYearId": "00000000-0000-4000-8000-000000000001", "weekday": 1, "startsAtMinute": 600, "endsAtMinute": 660, "protectedBreak": true},
+    {"id": "00000000-0000-4000-8000-000000000013", "academicYearId": "00000000-0000-4000-8000-000000000001", "weekday": 1, "startsAtMinute": 660, "endsAtMinute": 720, "protectedBreak": false}
+  ],
+  "facultyAvailability": [
+    {"facultyId": "00000000-0000-4000-8000-000000000008", "timeSlotId": "00000000-0000-4000-8000-000000000012", "available": true},
+    {"facultyId": "00000000-0000-4000-8000-000000000008", "timeSlotId": "00000000-0000-4000-8000-000000000013", "available": true},
+    {"facultyId": "00000000-0000-4000-8000-000000000009", "timeSlotId": "00000000-0000-4000-8000-000000000013", "available": true}
+  ]
+}

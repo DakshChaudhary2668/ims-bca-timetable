@@ -1,5 +1,10 @@
 node_modules/
 .pnpm-store/
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
 .next/
 dist/
 *.tsbuildinfo

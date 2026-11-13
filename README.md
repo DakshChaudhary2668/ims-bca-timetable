@@ -8,7 +8,7 @@ A workspace for the BCA Programme Leader to maintain academic records, assemble 
 - Manual weekly timetable editing with section, faculty and room views, shared drafts and revision checks.
 - Server validation and operator-authorized publication with immutable history. The UI includes browser print/PDF.
 
-Automatic generation, dated overrides, substitution approvals and managed hosting are future work. See the [implementation status](docs/IMPLEMENTATION_STATUS.md).
+The Python timetable proposal core is implemented. Express invocation and proposal application, dated overrides, substitution approvals and managed hosting are future work. See the [implementation status](docs/IMPLEMENTATION_STATUS.md).
 
 ## Stack and layout
 
@@ -17,7 +17,7 @@ Automatic generation, dated overrides, substitution approvals and managed hostin
 | `apps/web`                    | Next.js App Router, React, TypeScript, Tailwind, and the timetable's existing HTML, CSS and browser JavaScript         |
 | `apps/api`                    | Express, TypeScript, Zod, Prisma 7 with the pg adapter, and PostgreSQL                                                 |
 | `apps/api/prisma`             | Prisma schema and ordered SQL migrations                                                                               |
-| `services/scheduler`          | Python solver handoff. Google OR-Tools CP-SAT is planned                                                               |
+| `services/scheduler`          | Python OR-Tools CP-SAT proposal core; Express integration remains future work                                          |
 | `references/master-timetable` | Legacy source HTML and CSS used by Next.js. The standalone app additionally needs a private workbook-derived data file |
 | `docs`                        | Product, implementation, setup and policy references                                                                   |
 
